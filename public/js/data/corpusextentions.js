@@ -31,6 +31,14 @@ collection.push({
     template: '/templates/corpusCooc.html',
     js: require('../controllers/corpus/cooc.js'),
 });
+// edcat
+collection.push({
+    name: 'Related databases',
+    path: '/datasets',
+    controller: 'EdcatDatasetsController',
+    template: '/templates/edcatDatasets.html',
+    js: require('../controllers/corpus/edcat.js')
+});
 
 // Our module now returns our view
 module.exports = collection;
