@@ -1,1 +1,30 @@
-<h1>Hello EDCAT related datasets structure!</h1>
+<div class="row">
+  <div ng-show="!entities">Loading...</div>
+
+  <!-- left col -->
+  <div class="col-md-4">
+    <div class="panel panel-default facetPanel" ng-if="entities.length > 0">
+      <div class="panel-heading">Entities</div>
+      <div class="panel-body facetBody">
+        <div class="list-group facetList">
+          <a href="#" class="list-group-item facet" ng-class="{active: itemActive(entity)}" ng-repeat="entity in entities" ng-click="toggleActive(entity)">
+            {{ entity.name }}
+            <span class="badge" ng-show="it.count > 0">{{ entity.count }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- right col -->
+  <div class="col-md-8">
+    <h1>Related Datasets</h1>
+    <div ng-show="!datasets">Loading datasets...</div>
+    
+    <div class="dataset" ng-repeat="dataset in datasets">
+      <h2>{{dataset.title}}</h2>
+      <p>{{dataset.description}}</p>
+      <hr />
+    </div>
+  </div>
+</div>
