@@ -35,7 +35,7 @@ module.exports = function EdcatDatasetsController($scope, $state, $sce) {
         
 
         $scope.entities.map( function( entity ) {
-            entity.active = Math.random() > 0.5 ? true : false;
+            entity.active = true;
         } );
 
         $scope.toggleActive = function( item ) {
@@ -54,9 +54,6 @@ module.exports = function EdcatDatasetsController($scope, $state, $sce) {
                 if( entity.active )
                     activeEntities.push( entity );
             });
-
-            // edcat/context/search?tagIds[]=http://dbpedia.org/resource/Communes_of_Switzerland
-            // path = "http://localhost:8081/edcat/contexts/search?" + activeEntities.map(function(entity){ return "tagIds[]=\"" + encodeURIComponent(entity.uri) + "\""; }).join("&")
             path = "http://localhost:8081/edcat/context/search?" + activeEntities.map(function(entity){ return "tagIds[]=" + encodeURIComponent(entity.uri) + ""; }).join("&")
             
             console.log("Requesting " + path);
