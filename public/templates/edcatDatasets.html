@@ -1,8 +1,8 @@
 <div class="row">
-  <div ng-show="!entities">Loading...</div>
-
   <!-- left col -->
   <div class="col-md-4">
+    <h1>Configuration</h1>
+    <div ng-show="!entities">Loading...</div>
     <div class="panel panel-default facetPanel" ng-if="entities.length > 0">
       <div class="panel-heading">Entities</div>
       <div class="panel-body facetBody">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="entities.length > 0">
       <div class="panel-heading">EDCAT source</div>
       <div class="panel-body">
         <input type="text" class="form-control" ng-model="baseURL" placeholder="edcat base domain" />
