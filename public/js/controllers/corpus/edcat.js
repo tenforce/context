@@ -33,6 +33,7 @@ module.exports = function EdcatDatasetsController($scope, $state, $sce) {
 
         $scope.entities = foundEntities;
         
+        $scope.baseURL = "localhost:8081"
 
         $scope.entities.map( function( entity ) {
             entity.active = true;
@@ -54,7 +55,7 @@ module.exports = function EdcatDatasetsController($scope, $state, $sce) {
                 if( entity.active )
                     activeEntities.push( entity );
             });
-            path = "http://localhost:8081/edcat/context/search?" + activeEntities.map(function(entity){ return "tagIds[]=" + encodeURIComponent(entity.uri) + ""; }).join("&")
+            path = "http://" + $scope.baseURL + "/edcat/context/search?" + activeEntities.map(function(entity){ return "tagIds[]=" + encodeURIComponent(entity.uri) + ""; }).join("&")
             
             console.log("Requesting " + path);
 
@@ -64,6 +65,7 @@ module.exports = function EdcatDatasetsController($scope, $state, $sce) {
                     data[i].title = distillEnglish(data[i].title);
                     data[i].description = distillEnglish(data[i].description);
                 }
+                console.log("Received response for " + path);
                 $state.reload();
             });
         };
