@@ -17,13 +17,21 @@ distillEnglish = function(title) {
     return title;
 }
 
-module.exports = function EdcatDatasetsController($scope, $state, $sce) {
+// returns all entities for the supplied array of articles
+distillEntitiesFromArticles = function( articles ){
+    allEntities = []
+    for( var i = 0 ; i < articles.length ; i++ )
+        for( var j = 0 ; j < articles[i].entities.length ; j++ )
+            allEntities.push(articles[i].entities[j]);
+    return allEntities;
+}
 
+module.exports = function EdcatDatasetsController($scope, $state, $sce) {
     // get data
     $.getJSON('/api/corpus/' + $scope.currentCorpus._id + '/facets', function(data) {
-        allEntities = data.articles[0].entities;
         foundUris = []
         foundEntities = []
+        var allEntities = distillEntitiesFromArticles( data.articles );
         for( var i = 0 ; i < allEntities.length ; i++ ) {
             if( $.inArray(allEntities[i].uri, foundUris) === -1 ) {
                 foundEntities.push(allEntities[i]);
